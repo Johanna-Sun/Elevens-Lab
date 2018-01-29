@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * The Deck class represents a shuffled deck of cards.
@@ -71,6 +72,14 @@ public class Deck {
 	 */
 	public void shuffle() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+		Random random = new Random();
+		for (int k = (cards.size()-1); k > 0 ; k-- ) {
+			int exchange = random.nextInt(k);
+			Card exchangeValue = cards.get(exchange);
+			cards.set(exchange,cards.get(k));
+			cards.set(k,exchangeValue);
+		}
+		size = cards.size();
 	}
 
 	/**
@@ -84,7 +93,7 @@ public class Deck {
 		} else {
 			Card dealCard = new Card();
 			dealCard = cards.get(size-1);
-			cards.remove(size-1);
+			// cards.remove(size-1);
 			size -= 1;
 			return dealCard;
 		}
@@ -97,32 +106,32 @@ public class Deck {
 	 */
 	@Override
 	public String toString() {
-		String rtn = "size = " + size + "\nUndealt cards: \n";
+		String returnString = "size = " + size + "\nUndealt cards: \n";
 
 		for (int k = size - 1; k >= 0; k--) {
-			rtn = rtn + cards.get(k);
+			returnString = returnString + cards.get(k);
 			if (k != 0) {
-				rtn = rtn + ", ";
+				returnString = returnString + ", ";
 			}
 			if ((size - k) % 2 == 0) {
 				// Insert carriage returns so entire deck is visible on console.
-				rtn = rtn + "\n";
+				returnString = returnString + "\n";
 			}
 		}
 
-		rtn = rtn + "\nDealt cards: \n";
+		returnString = returnString + "\nDealt cards: \n";
 		for (int k = cards.size() - 1; k >= size; k--) {
-			rtn = rtn + cards.get(k);
+			returnString = returnString + cards.get(k);
 			if (k != size) {
-				rtn = rtn + ", ";
+				returnString = returnString + ", ";
 			}
 			if ((k - cards.size()) % 2 == 0) {
 				// Insert carriage returns so entire deck is visible on console.
-				rtn = rtn + "\n";
+				returnString = returnString + "\n";
 			}
 		}
 
-		rtn = rtn + "\n";
-		return rtn;
+		returnString = returnString + "\n";
+		return returnString;
 	}
 }
