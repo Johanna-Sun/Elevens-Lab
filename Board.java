@@ -95,8 +95,8 @@ public abstract class Board {
 	 * @return the card at position k on the board.
 	 * @param k is the board position of the card to return.
 	 */
-	public Card cardAt(int k) {
-		return cards[k];
+	public Card cardAt(int i) {
+		return cards[i];
 	}
 
 	/**
@@ -105,8 +105,8 @@ public abstract class Board {
 	 *        cards to be replaced.
 	 */
 	public void replaceSelectedCards(List<Integer> selectedCards) {
-		for (Integer k : selectedCards) {
-			deal(k.intValue());
+		for (Integer i : selectedCards) {
+			deal(i.intValue());
 		}
 	}
 
@@ -117,10 +117,12 @@ public abstract class Board {
 	 *         of the non-null entries on the board.
 	 */
 	public List<Integer> cardIndexes() {
+
 		List<Integer> selected = new ArrayList<Integer>();
-		for (int k = 0; k < cards.length; k++) {
-			if (cards[k] != null) {
-				selected.add(new Integer(k));
+
+		for (int i = 0; i < cards.length; i++) {
+			if (cards[i] != null) {
+				selected.add(i);
 			}
 		}
 		return selected;
@@ -131,11 +133,11 @@ public abstract class Board {
 	 * @return the string version of this board.
 	 */
 	public String toString() {
-		String s = "";
-		for (int k = 0; k < cards.length; k++) {
-			s = s + k + ": " + cards[k] + "\n";
+		String space = "";
+		for (int i = 0; i < cards.length; i++) {
+			space = space + i + ": " + cards[i] + "\n";
 		}
-		return s;
+		return space;
 	}
 
 	/**
@@ -177,8 +179,8 @@ public abstract class Board {
 	 * Deal cards to this board to start the game.
 	 */
 	private void dealCards() {
-		for (int k = 0; k < cards.length; k++) {
-			cards[k] = deck.deal();
+		for (int i = 0; i < cards.length; i++) {
+			cards[i] = deck.deal();
 		}
 	}
 }

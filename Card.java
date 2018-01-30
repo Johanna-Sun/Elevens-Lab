@@ -36,6 +36,7 @@ public class Card {
 		 suit = "default";
 		 pointValue = -1;
 	 }
+	 
 	public Card(String cardRank, String cardSuit, int cardPointValue) {
 		rank = cardRank;
 		suit = cardSuit;

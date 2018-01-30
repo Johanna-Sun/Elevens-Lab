@@ -51,9 +51,10 @@ public class ElevensBoard extends Board{
 	@Override
 	public boolean anotherPlayIsPossible() {
 
-		List<Integer>list = cardIndexes();
-//		System.out.println("the list is "+isLegal(list));
-		if (isLegal(list) == true) {
+		List<Integer> selectedList = cardIndexes();
+
+		if (containsJQK(selectedList) == true ||
+		containsPairSum11(selectedList) == true) {
 			return true;
 		} else {
 			return false;
@@ -83,11 +84,15 @@ public class ElevensBoard extends Board{
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
 
-		if (containsJQK(selectedCards) == true || containsPairSum11(selectedCards) == true) {
+		if (containsJQK(selectedCards) && selectedCards.size() == 3) {
 			return true;
-		} else {
-			return false;
 		}
+
+		if (containsPairSum11(selectedCards) && selectedCards.size() == 2) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -101,9 +106,9 @@ public class ElevensBoard extends Board{
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-		for (int i=0; i<BOARD_SIZE; i++) {
+		for (int i = 0; i<selectedCards.size(); i++) {
 			int value = 11- cardAt(selectedCards.get(i)).pointValue();
-		for (int j=0; j<BOARD_SIZE; j++) {
+		for (int j = 0; j<selectedCards.size(); j++) {
 			if (cardAt(selectedCards.get(j)).pointValue() == value) {
 				return true;
 			}
@@ -122,29 +127,28 @@ public class ElevensBoard extends Board{
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
-		// boolean YKing = false;
-		// boolean YQueen = false;
-		// boolean YJack = false;
-		int sum = 0;
-		for (Integer c: selectedCards) {
-			if (cards[c].rank() == "jack" || cards[c].rank() == "queen" || cards[c].rank() == "king") {
-				sum += 1;
+			boolean jack = false;
+			boolean queen = false;
+			boolean king = false;
+
+			for (Integer c: selectedCards) {
+				if (cards[c].rank() == "jack") {
+					jack = true;
+				}
+				if (cards[c].rank() == "queen") {
+					queen = true;
+				}
+				if (cards[c].rank() == "king") {
+					king = true;
+				}
 			}
-			// if (cards[c].rank() == "jack") YJack=true;
-			// if (cards[c].rank() == "queen") YQueen=true;
-			// if (cards[c].rank() == "king") YKing=true;
-			// if (cards[c].rank() == "jack"&&cards[c].rank() == "queen"&&cards[c].rank() == "king") {
-			// 	return true;
-			// }
-		}
-		// return false;
-		if (sum == 3) {
-			return true;
-		} else {
-			return false;
-		}
 
-
+			// return false;
+			if ( jack && queen && king) {
+				return true;
+			} else {
+				return false;
+			}
 
 
 	}
