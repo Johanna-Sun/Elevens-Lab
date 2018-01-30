@@ -12,14 +12,14 @@ public class Deck {
     /**
      * cards contains all the cards in the deck.
      */
-    private List<Card> cards;
+    public List<Card> cards;
 
     /**
      * size is the number of not-yet-dealt cards.
      * Cards are dealt from the top (highest index) down.
      * The next card to be dealt is at size - 1.
      */
-    private int size;
+    public int size;
 
 
     /**
@@ -54,7 +54,11 @@ public class Deck {
      */
     public boolean isEmpty() {
         /* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-        return cards.isEmpty();
+        if (size == 0) {
+          return true;
+        } else {
+          return false;
+        }
     }
 
     /**
