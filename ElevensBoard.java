@@ -37,7 +37,7 @@ public class ElevensBoard extends Board{
 
 	@Override
 	public void newGame() {
-		deck = new Deck(RANKS, SUITS, POINT_VALUES);
+		Deck deck = new Deck(RANKS, SUITS, POINT_VALUES);
 		super.newGame();
 	}
 	/**
